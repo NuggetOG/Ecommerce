@@ -1,12 +1,53 @@
-# React + Vite
+# 🛒 Ecommerce Frontend – BLACRO
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a modern frontend for an ecommerce store built with **React** and styled for a smooth, minimal shopping experience.
 
-Currently, two official plugins are available:
+### ⚙️ Tech Stack
+- React
+- Vite
+- Jotai (State Management)
+- Tailwind CSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+### 💡 Wishlist Feature – Powered by Jotai
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Recently migrated from Recoil to **Jotai** for state management.  
+Implemented a flexible and reactive **Wishlist system**:
+
+- Used `atomFamily` equivalent for individual product wishlisting.
+- Centralized wishlist state for quick access and rendering.
+- Leveraged Jotai’s composability to keep components decoupled yet connected.
+
+This small shift simplified logic and made the codebase more maintainable.
+
+---
+
+### 📁 Folder Structure Overview
+
+client/ ├── public/ │ └── images/ ├── src/ │ ├── atoms/ │ ├── components/ │ ├── data/ │ ├── pages/ │ └── App.jsx
+
+
+---
+
+### 🚀 Getting Started
+
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/NuggetOG/Ecommerce.git
+2.Move into the project:
+  cd Ecommerce/client
+3.Install dependencies:
+  npm install
+4.Start the dev server:
+  npm run dev
+  
+🙌 Contributions
+This is a personal learning project, but feel free to open issues or contribute ideas!
+
+## 🖼️ Preview
+
+![App Preview](client/public/images/preview.png)
+
+
+
