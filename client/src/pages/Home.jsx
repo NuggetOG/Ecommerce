@@ -1,7 +1,10 @@
+import {Breed} from "../components/Breed"
+import {Cover} from "../components/Cover"
 export const Home = ()=>{
     return(
         <>
-      <h1>Home</h1>  
+        <Breed></Breed>
+        <Cover></Cover>
         </>
     )
 }
