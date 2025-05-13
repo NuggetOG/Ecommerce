@@ -1,10 +1,14 @@
-import { ProductCard } from "../components/ProductCard"
-import { products } from "../data/Products"
-export const Store = ()=>{
-    return(<div className = "flex flex-wrap gap-1 justify-center items-center p-5">
-      {products.map((product)=>
-              <ProductCard product = {product}/>
-      )}        
+import { NavLink, Outlet } from "react-router-dom";
+
+export const Store = () => {
+  return (
+    <div className="p-4">
+      <div className="flex gap-4 mb-4">
+        <NavLink to="all" className={({ isActive }) => isActive ? "font-bold" : ""}>All</NavLink>
+        <NavLink to="men" className={({ isActive }) => isActive ? "font-bold" : ""}>Men</NavLink>
+        <NavLink to="women" className={({ isActive }) => isActive ? "font-bold" : ""}>Women</NavLink>
+      </div>
+      <Outlet />
     </div>
-    )
-}
+  );
+};

@@ -1,7 +1,11 @@
+import { Signup } from "./Signup"
+import { currentUserContext } from "../context/authContext"
+import { useContext } from "react"
 export const Profile = ()=>{
+    const {currentUser } = useContext(currentUserContext);
     return(
         <>
-        <h1>Profile</h1>
+        {currentUser.user.firstName}
         </>
     )
 }
