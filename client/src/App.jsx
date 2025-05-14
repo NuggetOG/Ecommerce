@@ -12,10 +12,15 @@ import {Women} from "./components/Women";
 import { Signup } from './pages/Signup';
 import { Login } from './pages/Login';
 import { currentUserContext } from './context/authContext';
+import { cartContext } from './context/cartContext';
 import { useState } from 'react';
 function App() {
+  const [cart,setCart] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
 return(<>
+<cartContext.Provider value ={{
+  cart, setCart
+}}>
 <currentUserContext.Provider value= {{
   currentUser, setCurrentUser
 }}>
@@ -35,6 +40,8 @@ return(<>
       <Route path="/profile" element = {<Profile />} />
     </Routes>
 </currentUserContext.Provider>
+</cartContext.Provider>
+
 </>)
 }
 

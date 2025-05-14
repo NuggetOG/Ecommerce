@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
     
-    const navigate = useNavigate();
-    const { currentUser,setCurrentUser } = useContext(currentUserContext);
-    useEffect(()=>{
-        if(currentUser);
-        navigate("/store");
-    }, [currentUser]);
+  const navigate = useNavigate();
+  const { currentUser,setCurrentUser } = useContext(currentUserContext);
+  
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/store");
+    }
+  }, [currentUser]);
 
   const [formData, setFormData] = useState({
     email: '',
@@ -32,7 +34,6 @@ export const Login = () => {
   }
   return (
     <div>
-      {!currentUser ? (
         <form onSubmit={handleSubmit}>
           <input
             placeholder="Email"
@@ -47,9 +48,6 @@ export const Login = () => {
           />
           <button type="submit">login</button>
         </form>
-      ) : (
-        <p>Welcome {currentUser.user.firstName}</p> 
-      )}
     </div>
   );
 };
