@@ -43,23 +43,23 @@ export const Navbar = () => {
             </nav>
 
             {isOpen && (
-  <div className="absolute right-4 top-10 w-48 lg:hidden bg-[#17181a] border-0 p-4 opacity-50">
-    <ul>
-      <li><NavLink to="/" className="block">Home</NavLink></li>
-      <li><NavLink to="/wishlist" className="block">Wishlist</NavLink></li>
-      <li><NavLink to="/store" className="block">Store</NavLink></li>
-      <li><NavLink to="/cart" className="block">Cart</NavLink></li>
+  <div className="absolute right-4 top-14 w-64 lg:hidden bg-black/90 opacity-70 rounded-xl p-6 shadow-xl backdrop-blur-md space-y-4 text-white text-lg z-50 transition-all">
+    <ul className="space-y-3">
+      <li><NavLink to="/" className="block hover:text-gray-300">Home</NavLink></li>
+      <li><NavLink to="/wishlist" className="block hover:text-gray-300">Wishlist</NavLink></li>
+      <li><NavLink to="/store" className="block hover:text-gray-300">Store</NavLink></li>
       {currentUser ? (
-        <li><NavLink to="/profile" className="block">Profile</NavLink></li>
+        <li><NavLink to="/profile" className="block hover:text-gray-300">Profile</NavLink></li>
       ) : (
         <>
-          <li><NavLink to="/login" className="block">Login</NavLink></li>
-          <li><NavLink to="/signup" className="block">Signup</NavLink></li>
+          <li><NavLink to="/login" className="block hover:text-gray-300">Login</NavLink></li>
+          <li><NavLink to="/signup" className="block hover:text-gray-300">Signup</NavLink></li>
         </>
       )}
     </ul>
   </div>
 )}
+
 
         </>
     );

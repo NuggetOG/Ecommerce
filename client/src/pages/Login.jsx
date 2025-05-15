@@ -32,22 +32,48 @@ export const Login = () => {
       console.log("Error in registering user:", error.message);
     }
   }
-  return (
-    <div>
-        <form onSubmit={handleSubmit}>
-          <input
-            placeholder="Email"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          />
-          <input
-            placeholder="Password"
-            type="password"
-            value={formData.password}
-            onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-          />
-          <button type="submit">login</button>
-        </form>
-    </div>
-  );
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-900 text-gray-100 px-4"
+      style={{
+        backgroundImage:
+          'url("/images/guys3.png")',
+      }}>
+        <div className=" w-full max-w-md p-8 rounded-xl shadow-md space-y-6">
+          <h2 className="text-3xl font-bold text-center text-green-200">Welcome Back</h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="w-full p-3 rounded bg-gray-800 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400"
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              className="w-full p-3 rounded bg-gray-800 text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400"
+            />
+            <button
+              type="submit"
+              className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded transition"
+            >
+              Log In
+            </button>
+          </form>
+    
+          <div className="text-center">
+            <p className="text-sm">New here?</p>
+            <button
+              onClick={() => navigate("/signup")}
+              className="mt-2 text-green-300 hover:text-green-400 underline transition"
+            >
+              Create an Account
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+    
 };
