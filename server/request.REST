@@ -1,0 +1,201 @@
+POST http://localhost:5000/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "firstName": "admin",
+  "lastName": "one",
+  "password": "password"
+}
+###
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@gmail.com",
+  "password": "password"
+}
+###
+GET http://localhost:5000/api/v1/user/me
+Cookie:token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2NTI2MDY3LCJleHAiOjE3NDY2MTI0Njd9.DMz3hjCPb3q_-4-5iE4AGr5pVk0TY5YRzGTQOevx_Pg
+###
+POST http://localhost:5000/api/v1/product/bulkCreate
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2NjAwMTA0LCJleHAiOjE3NDY2ODY1MDR9.pWruUr6uhh83ORuyMBURpfaJTLNXCfczVE01jwbrAkU
+Content-Type: application/json
+
+{
+  "products": [
+    {
+      "productName": "Men's Classic Black Tee",
+      "price": 999,
+      "category": "men",
+      "imageUrl": "https://example.com/images/mens-black-tee.jpg",
+      "sizes": [
+        { "sizeName": "S", "quantity": 10 },
+        { "sizeName": "M", "quantity": 15 },
+        { "sizeName": "L", "quantity": 8 }
+      ]
+    },
+    {
+      "productName": "Men's White Polo Shirt",
+      "price": 1299,
+      "category": "men",
+      "imageUrl": "https://example.com/images/mens-white-polo.jpg",
+      "sizes": [
+        { "sizeName": "M", "quantity": 12 },
+        { "sizeName": "L", "quantity": 10 },
+        { "sizeName": "XL", "quantity": 5 }
+      ]
+    },
+    {
+      "productName": "Men's Navy Blue Henley",
+      "price": 1199,
+      "category": "men",
+      "imageUrl": "https://example.com/images/mens-navy-henley.jpg",
+      "sizes": [
+        { "sizeName": "S", "quantity": 8 },
+        { "sizeName": "M", "quantity": 14 },
+        { "sizeName": "L", "quantity": 9 }
+      ]
+    },
+    {
+      "productName": "Men's Olive Green Tee",
+      "price": 1099,
+      "category": "men",
+      "imageUrl": "https://example.com/images/mens-olive-tee.jpg",
+      "sizes": [
+        { "sizeName": "M", "quantity": 11 },
+        { "sizeName": "L", "quantity": 13 },
+        { "sizeName": "XL", "quantity": 7 }
+      ]
+    },
+    {
+      "productName": "Men's Charcoal V-Neck",
+      "price": 999,
+      "category": "men",
+      "imageUrl": "https://example.com/images/mens-charcoal-vneck.jpg",
+      "sizes": [
+        { "sizeName": "S", "quantity": 10 },
+        { "sizeName": "M", "quantity": 12 },
+        { "sizeName": "L", "quantity": 10 }
+      ]
+    },
+    {
+      "productName": "Women's Slim Fit Pink Tee",
+      "price": 899,
+      "category": "women",
+      "imageUrl": "https://example.com/images/womens-pink.jpg",
+      "sizes": [
+        { "sizeName": "S", "quantity": 12 },
+        { "sizeName": "M", "quantity": 10 },
+        { "sizeName": "L", "quantity": 5 }
+      ]
+    },
+    {
+      "productName": "Women's Crop Top White",
+      "price": 799,
+      "category": "women",
+      "imageUrl": "https://example.com/images/womens-crop-white.jpg",
+      "sizes": [
+        { "sizeName": "S", "quantity": 14 },
+        { "sizeName": "M", "quantity": 9 }
+      ]
+    },
+    {
+      "productName": "Women's Oversized Black Tee",
+      "price": 999,
+      "category": "women",
+      "imageUrl": "https://example.com/images/womens-oversized-black.jpg",
+      "sizes": [
+        { "sizeName": "M", "quantity": 11 },
+        { "sizeName": "L", "quantity": 7 },
+        { "sizeName": "XL", "quantity": 4 }
+      ]
+    },
+    {
+      "productName": "Unisex Oversized Beige Tee",
+      "price": 1099,
+      "category": "unisex",
+      "imageUrl": "https://example.com/images/unisex-beige.jpg",
+      "sizes": [
+        { "sizeName": "M", "quantity": 20 },
+        { "sizeName": "L", "quantity": 15 },
+        { "sizeName": "XL", "quantity": 10 }
+      ]
+    },
+    {
+      "productName": "Unisex Graphic Black Tee",
+      "price": 1199,
+      "category": "unisex",
+      "imageUrl": "https://example.com/images/unisex-graphic-black.jpg",
+      "sizes": [
+        { "sizeName": "S", "quantity": 18 },
+        { "sizeName": "M", "quantity": 16 },
+        { "sizeName": "L", "quantity": 12 }
+      ]
+    }
+  ]
+}
+
+
+###
+GET http://localhost:5000/api/v1/product
+###
+POST http://localhost:5000/api/v1/product/1
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2NjE2MjE0LCJleHAiOjE3NDY3MDI2MTR9.VdwiGP1WV2I1QmDZPydgXTY24MmmEacv7TDZ9_uovD0
+Content-Type: application/json
+
+{
+  "category": "men"
+}
+
+###
+POST http://localhost:5000/api/v1/product/delete/1
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2NjE2MjE0LCJleHAiOjE3NDY3MDI2MTR9.VdwiGP1WV2I1QmDZPydgXTY24MmmEacv7TDZ9_uovD0
+### ✅ Get User Cart
+GET http://localhost:5000/api/v1/cart/
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2Njg5NjAzLCJleHAiOjE3NDY3NzYwMDN9.TCWgpv2iZL1Ve8hafihp4RyZV-M3OOXk1JLmYPnAfzU
+
+
+### ✅ Create Cart Item
+POST http://localhost:5000/api/v1/cart/createCart
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2Njg5NjAzLCJleHAiOjE3NDY3NzYwMDN9.TCWgpv2iZL1Ve8hafihp4RyZV-M3OOXk1JLmYPnAfzU
+Content-Type: application/json
+
+{
+  "productId": 2,
+  "sizeId": 30,
+  "quantity": 3
+}
+
+
+### ✅ Update Cart Quantity (pass cartId in URL)
+POST http://localhost:5000/api/v1/cart/update-quantity/3
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2Njg5NjAzLCJleHAiOjE3NDY3NzYwMDN9.TCWgpv2iZL1Ve8hafihp4RyZV-M3OOXk1JLmYPnAfzU
+Content-Type: application/json
+
+{
+  "quantity": 3
+}
+
+
+### ✅ Delete Cart Item 
+POST http://localhost:5000/api/v1/cart/delete-cart/3
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2Njg5NjAzLCJleHAiOjE3NDY3NzYwMDN9.TCWgpv2iZL1Ve8hafihp4RyZV-M3OOXk1JLmYPnAfzU
+
+### ➕ Add to Wishlist
+POST http://localhost:5000/api/v1/wishlist/add
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2Njg5NjAzLCJleHAiOjE3NDY3NzYwMDN9.TCWgpv2iZL1Ve8hafihp4RyZV-M3OOXk1JLmYPnAfzU
+Content-Type: application/json
+
+{
+  "productId": 8
+}
+
+### 🛒 Get User Wishlist
+GET http://localhost:5000/api/v1/wishlist/
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2Njg5NjAzLCJleHAiOjE3NDY3NzYwMDN9.TCWgpv2iZL1Ve8hafihp4RyZV-M3OOXk1JLmYPnAfzU
+
+### ❌ Delete Wishlist Item
+DELETE http://localhost:5000/api/v1/wishlist/delete/1
+Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2Njg5NjAzLCJleHAiOjE3NDY3NzYwMDN9.TCWgpv2iZL1Ve8hafihp4RyZV-M3OOXk1JLmYPnAfzU
