@@ -7,10 +7,9 @@ const getUserInfo = async (req, res) => {
 
     const user = await prisma.user.findUnique({
       where: { id: req.user.id },
-      select: {
-        firstName: true,
-        lastName: true,
-        email: true,
+      include: {
+        Cart: true,
+        Wishlist: true,
       },
     });
 
@@ -26,7 +25,7 @@ const getUserInfo = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({ message: "Server error", error: error.message });
+    res.status(500).json({ message: "Server error", success :true,user});
   }
 };
 module.exports = {getUserInfo};

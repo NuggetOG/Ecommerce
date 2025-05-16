@@ -24,10 +24,11 @@ export const Login = () => {
      try {
       const loginResponse = await loginUser({
         email: formData.email,
-        password: formData.password
+        password: formData.password,
       });
       console.log("User login successful:", JSON.stringify(loginResponse));
       setCurrentUser(loginResponse); // ✅ store it in state
+      console.log(`login res :${loginResponse}`);
     } catch (error) {
       console.log("Error in registering user:", error.message);
     }

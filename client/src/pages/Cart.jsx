@@ -2,20 +2,13 @@ import { useContext, useEffect, useState } from "react";
 import { cartContext } from "../context/cartContext";
 import { getCartItems } from "../api/cart";
 import { useNavigate } from "react-router-dom";
-import { currentUserContext } from "../context/authContext";
 
 export const Cart = () => {
   const navigate = useNavigate();
   const { cart, setCart } = useContext(cartContext);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const {currentUser} = useContext(currentUserContext);
-  
-  useEffect(() => {
-    if (!currentUser) {
-      navigate("/login");
-      return;
-    }})
+
   useEffect(() => {
     const fetchCart = async () => {
       try {

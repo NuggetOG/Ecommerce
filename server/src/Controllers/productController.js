@@ -1,3 +1,4 @@
+
 const { prisma } = require("../prisma");
 
 const createProduct = async (req, res) => {
@@ -68,7 +69,7 @@ const getAllProducts = async (req, res) => {
       skip: parseInt(skip),
       take: parseInt(limit),
     });
-
+    console.log(`${products.map(product => product.sizes)}`);
     return res.status(200).json({
       success: true,
       products,
@@ -152,11 +153,14 @@ const getProductById = async (req,res)=>{
       where:{
         id: productId,
       },
+      include:{
+        sizes:true,
+      }
     })
     if(!product){
-      return res.status(202).json({success:true, message:`no product with id: ${productId} found`});
+      return res.status(404).json({success:false, message:`no product with id: ${productId} found`});
     }
-    return res.status(404).json({success:true,message:`successfully found product with id ${productId}`,product});
+    return res.status(202).json({success:true,message:`successfully found product with id ${productId}`,product});
   }
   catch(error){
     return res.status(500).json({success: false, message:`internal server error ${error.message}`});

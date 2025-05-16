@@ -14,6 +14,7 @@ export const All = () => {
 
         if (!response.success || !response.products) {
           setError("Failed to load products");
+          console.log(`${response.products}`);
         } else {
           setProducts(response.products);
         }

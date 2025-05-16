@@ -2,19 +2,22 @@ import { useState,useContext } from "react"
 import { NavLink } from "react-router-dom" 
 import { Menu, X } from "lucide-react"
 import { currentUserContext } from "../context/authContext";
-
+import { cartContext } from "../context/cartContext";
 
 const NavLinks = () => {
     const { currentUser } = useContext(currentUserContext);
-  
+    const {cart} = useContext(cartContext);
+    const cartLength = cart.length;
     return (
       <div className="hidden lg:flex gap-3 right-0">
         <NavLink to="/">Home</NavLink>
         <NavLink to="/wishlist">Wishlist</NavLink>
         <NavLink to="/store">Store</NavLink>
-        <NavLink to="/cart">Cart</NavLink>
         {currentUser ? (
+          <>
+          <NavLink to="/cart">Cart({cartLength})</NavLink>
           <NavLink to="/profile">Profile</NavLink>
+</>
         ) : (
           <>
             <NavLink to="/login">Login</NavLink>
@@ -30,6 +33,8 @@ export const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const toggleMenu = () => setIsOpen(!isOpen);
     const { currentUser } = useContext(currentUserContext);
+    const {cart} = useContext(cartContext);
+    const cartLength = cart.length;
 
     return (
         <>
@@ -49,7 +54,11 @@ export const Navbar = () => {
       <li><NavLink to="/wishlist" className="block hover:text-gray-300">Wishlist</NavLink></li>
       <li><NavLink to="/store" className="block hover:text-gray-300">Store</NavLink></li>
       {currentUser ? (
-        <li><NavLink to="/profile" className="block hover:text-gray-300">Profile</NavLink></li>
+        <>
+                <li><NavLink to="/profile" className="block hover:text-gray-300">Profile</NavLink></li>
+                <li><NavLink to="/cart" className="block hover:text-gray-300">Cart ({cartLength})</NavLink></li>
+
+        </>
       ) : (
         <>
           <li><NavLink to="/login" className="block hover:text-gray-300">Login</NavLink></li>

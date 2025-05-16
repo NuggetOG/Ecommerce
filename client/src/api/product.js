@@ -21,8 +21,8 @@ export const updateProductById = async(productData)=>{
     return response.data;
 }
 
-export const getProductById = async(productData)=>{
-    const response = await axios.get(`${baseurl}/${productData.productId}`);
+export const getProductById = async(productId)=>{
+    const response = await axios.get(`${baseurl}/${productId}`);
     return response.data;
 }
 
