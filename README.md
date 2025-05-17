@@ -1,33 +1,4 @@
-# Blacro
 
-Blacro is a modern, minimal, and responsive e-commerce web application built with React, Tailwind CSS, and a Node.js/Express backend. It features authentication, product browsing, cart, wishlist, and profile management, with a focus on clean UI and smooth user experience.
-
----
-
-## 🚀 Features
-
-- **User Authentication:** Signup, login, and persistent sessions using JWT cookies.
-- **Product Catalog:** Browse all products, or filter by Men/Women categories.
-- **Product Details:** View product images, sizes, and add to cart.
-- **Cart & Wishlist:** Add/remove products, view cart and wishlist, and proceed to checkout.
-- **Profile Page:** View user info, cart count, wishlist count, and order history.
-- **Responsive Design:** Mobile-first, works great on all devices.
-- **Modern UI:** Built with Tailwind CSS and Framer Motion for smooth animations.
-- **State Management:** Uses React Context and Jotai for global state.
-- **API Integration:** Connects to a RESTful backend for all data operations.
-
----
-
-## 🖥️ Tech Stack
-
-- **Frontend:** React, Tailwind CSS, Framer Motion, Jotai
-- **Backend:** Node.js, Express, Prisma (with PostgreSQL or SQLite)
-- **Auth:** JWT (stored in HTTP-only cookies)
-- **Other:** Vite, Axios
-
----
-
-## 📂 Project Structure
 # Blacro
 
 Blacro is a modern, minimal, and responsive e-commerce web application built with React, Tailwind CSS, and a Node.js/Express backend. It features authentication, product browsing, cart, wishlist, and profile management, with a focus on clean UI and smooth user experience.
@@ -106,6 +77,7 @@ npm install
 ```
 
 ### 3. Environment Variables
+## 📂 Project Structure
 
 - **Frontend:**  
   If you use environment variables (e.g., for API URLs), create a `.env` file in `client/` as needed.
@@ -199,7 +171,4 @@ This project is licensed under the MIT License.
 
 ---
 
-**Happy Hacking!**
-**Happy Hacking!**
-```
-Copy and paste this into your README.md file. Adjust project URLs, database info, and screenshots as needed!
+
