@@ -16,9 +16,11 @@ import { PrivateRoute } from './components/PrivateRoute';
 // ✅ Use the new Provider components
 import { CurrentUserProvider } from './context/authContext';
 import { CartProvider } from './context/cartContext';
+import { QuantityProvider } from './context/quantityContext';
 
 function App() {
   return (
+  <QuantityProvider>
     <CartProvider>
       <CurrentUserProvider>
         <Header />
@@ -38,6 +40,7 @@ function App() {
         </Routes>
       </CurrentUserProvider>
     </CartProvider>
+  </QuantityProvider>
   );
 }
 

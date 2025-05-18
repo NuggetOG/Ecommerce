@@ -1,6 +1,9 @@
 import React from "react";
+import { useContext } from "react";
+import { quantityContext } from "../context/quantityContext";
 
-export const QtyButton = ({ quantity, setQuantity }) => {
+export const QtyButton = () => {
+  const { quantity, setQuantity } = useContext(quantityContext);
   const increment = () => setQuantity((prev) => prev + 1);
   const decrement = () => {
     if (quantity > 0) setQuantity((prev) => prev - 1);

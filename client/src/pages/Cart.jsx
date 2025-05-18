@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { cartContext } from "../context/cartContext";
-import { getCartItems } from "../api/cart";
+import { getCartItems, deleteCartItem } from "../api/cart";
 import { useNavigate } from "react-router-dom";
+import { QtyButton } from "../components/QtyButton";
 
 export const Cart = () => {
   const navigate = useNavigate();
@@ -13,21 +14,35 @@ export const Cart = () => {
     const fetchCart = async () => {
       try {
         const response = await getCartItems();
-        console.log(response.cartItems);
         if (!response.success || !response.cartItems) {
           setError("Failed to load cart");
         } else {
           setCart(response.cartItems);
         }
-      } catch (err) {
-        console.log(`Error in fetching cart: ${err.message}`);
+      } catch {
         setError("Something went wrong in loading cart");
       } finally {
         setLoading(false);
       }
     };
     fetchCart();
+    // eslint-disable-next-line
   }, []);
+
+  const removeFromCart = async (cartId) => {
+    try {
+      const response = await deleteCartItem(cartId);
+      if (response.success) {
+        setCart((prev) => prev.filter((item) => item.id !== cartId));
+      } else {
+        setError("Failed to remove item from cart");
+      }
+    } catch{
+      setError("Something went wrong in removing item from cart");
+    }
+  };
+
+
 
   if (loading) {
     return <p className="text-center p-5">Loading cart...</p>;
@@ -53,15 +68,31 @@ export const Cart = () => {
 
   return (
     <div className="p-4">
-      {cart.map((item) => (
-        <div key={item.id} className="border rounded p-4 mb-4 shadow-md">
-          <h2 className="text-lg font-semibold">{item.product.productName}</h2>
-          <img src={item.product.imgUrl} alt={item.product.productName} className="h-24 w-24 object-cover" />
-          <p>Size: {item.size.sizeName}</p>
-          <p>Quantity: {item.quantity}</p>
-          <p>Price: ₹{item.product.price}</p>
-        </div>
-      ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {cart.map((item) => (
+          <div
+            key={item.id}
+            className="flex flex-col items-center border rounded-xl p-6 mb-4 shadow-lg bg-white transition-transform hover:scale-105"
+          >
+            <img
+              src={item.product.imgUrl}
+              alt={item.product.productName}
+              className="h-40 w-40 object-cover rounded-lg mb-4"
+            />
+            <h2 className="text-xl font-bold mb-2 text-center">{item.product.productName}</h2>
+            <p className="mb-1"><span className="font-semibold">Size:</span> {item.size.sizeName}</p>
+            <p className="mb-1"><span className="font-semibold">Quantity:</span> {item.quantity}</p>
+                  <QtyButton/>
+            <p className="mb-3"><span className="font-semibold">Price:</span> ₹{item.product.price}</p>
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition"
+              onClick={() => removeFromCart(item.id)}
+            >
+              Remove from cart
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

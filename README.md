@@ -199,7 +199,3 @@ This project is licensed under the MIT License.
 
 ---
 
-**Happy Hacking!**
-**Happy Hacking!**
-```
-Copy and paste this into your README.md file. Adjust project URLs, database info, and screenshots as needed!

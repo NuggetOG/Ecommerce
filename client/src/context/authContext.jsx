@@ -1,24 +1,12 @@
 import { createContext, useState, useEffect } from "react";
 
-// Just export the context as you already are
-export const currentUserContext = createContext({
-  currentUser: null,
-  setCurrentUser: () => {},
-});
+export const currentUserContext = createContext();
 
-// Here's the provider component
 export const CurrentUserProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(
+    () => JSON.parse(localStorage.getItem("currentUser")) || null
+  );
 
-  // Load user from localStorage when the app starts
-  useEffect(() => {
-    const storedUser = localStorage.getItem("currentUser");
-    if (storedUser) {
-      setCurrentUser(JSON.parse(storedUser));
-    }
-  }, []);
-
-  // Update localStorage when currentUser changes
   useEffect(() => {
     if (currentUser) {
       localStorage.setItem("currentUser", JSON.stringify(currentUser));

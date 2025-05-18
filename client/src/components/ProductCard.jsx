@@ -2,24 +2,17 @@ import React, { useCallback, useState, useEffect, useContext } from "react";
 import { QtyButton } from "./QtyButton";
 import { Dropdown } from "./Dropdown";
 import { Heart } from "./Heart";
-import { productWishlistState } from "../atoms/productwishliststate";
-import { useAtom } from "jotai";
 import { cartContext } from "../context/cartContext";
+import { quantityContext } from "../context/quantityContext";
 import { createCartItem } from "../api/cart";
 
+
 export const ProductCard = ({ product }) => {
-  const [quantity, setQuantity] = useState(0);
+  const {quantity, setQuantity} = useContext(quantityContext);
   const [sizes, setSizes] = useState([]);
   const [error, setError] = useState("");
-  const [isWishlisted, setIsWishlisted] = useAtom(productWishlistState(product.id));
   const [loading, setLoading] = useState(true);
   const { cart, setCart } = useContext(cartContext);
-
-  console.log(`is wishlisted: ${isWishlisted}`);
-
-  const toggleWishlist = useCallback(() => {
-    setIsWishlisted((prev) => !prev);
-  }, [setIsWishlisted]);
 
   const addToCart = useCallback(async () => {
     if (sizes.length === 0 || quantity === 0) {
@@ -111,8 +104,8 @@ export const ProductCard = ({ product }) => {
       >
         Add to cart
       </button>
-      <QtyButton quantity={quantity} setQuantity={setQuantity} />
-      <Heart onClick={toggleWishlist} isActive={isWishlisted} />
+      <QtyButton />
+      <Heart/>
     </div>
   );
 };
