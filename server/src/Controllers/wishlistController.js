@@ -5,6 +5,8 @@ const addToWishlist = async (req, res) => {
   try {
     const userId = req.user.id;
     const { productId } = req.body;
+    console.log("req.body", req.body);
+
 
     if (!productId) {
       return res.status(400).json({ success: false, message: "Product ID is required" });
@@ -55,6 +57,15 @@ const getUserWishlist = async (req, res) => {
 const deleteWishlistItem = async (req, res) => {
   try {
     const wishlistId = Number(req.params.id);
+
+    // Check if the wishlist item exists
+    const existing = await prisma.wishlist.findUnique({
+      where: { id: wishlistId },
+    });
+
+    if (!existing) {
+      return res.status(404).json({ success: false, message: "Wishlist item not found" });
+    }
 
     await prisma.wishlist.delete({
       where: { id: wishlistId },

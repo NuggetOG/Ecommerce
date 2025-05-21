@@ -1,33 +1,48 @@
 import { useEffect, useState } from "react";
 import { ProductCard } from "./ProductCard";
-import { getAllProducts } from "../api/product";
+import { getAllProducts } from "../api/product"; // Ensure this API supports pagination
 
 export const All = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const fetchProducts = async (page) => {
+    try {
+      setLoading(true);
+      const response = await getAllProducts(page); // Pass the page number to the API
+      if (response.success && response.products) {
+        setProducts(response.products);
+        setCurrentPage(response.currentPage);
+        setTotalPages(response.totalPages);
+      } else {
+        setError("Failed to load products");
+      }
+    } catch (err) {
+      console.error("Error fetching products:", err);
+      setError("Something went wrong when loading products");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await getAllProducts();
+    fetchProducts(currentPage);
+  }, [currentPage]);
 
-        if (!response.success || !response.products) {
-          setError("Failed to load products");
-          console.log(`${response.products}`);
-        } else {
-          setProducts(response.products);
-        }
-      } catch (err) {
-        console.error("Error fetching unisex products:", err);
-        setError("Something went wrong when loading products");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  };
 
-    fetchProducts();
-  }, []);
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  };
 
   if (loading) {
     return (
@@ -48,16 +63,37 @@ export const All = () => {
   if (products.length === 0) {
     return (
       <div className="text-center p-5">
-        <p>No unisex products available at the moment</p>
+        <p>No products available at the moment</p>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-wrap gap-1 justify-center items-center p-5">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+    <div className="p-5">
+      <div className="flex flex-wrap gap-4 justify-center items-center">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+      <div className="flex justify-center mt-6 gap-4">
+        <button
+          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded"
+          onClick={handlePrevPage}
+          disabled={currentPage === 1}
+        >
+          Prev
+        </button>
+        <span className="px-4 py-2">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded"
+          onClick={handleNextPage}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,18 +1,73 @@
 import React, { useCallback, useState, useEffect, useContext } from "react";
 import { QtyButton } from "./QtyButton";
 import { Dropdown } from "./Dropdown";
-import { Heart } from "./Heart";
 import { cartContext } from "../context/cartContext";
 import { quantityContext } from "../context/quantityContext";
 import { createCartItem } from "../api/cart";
-
+import { addToWishlist, deleteWishlistItem, getUserWishlist } from "../api/wishlist";
 
 export const ProductCard = ({ product }) => {
-  const {quantity, setQuantity} = useContext(quantityContext);
+  const { quantity, setQuantity } = useContext(quantityContext);
   const [sizes, setSizes] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const { cart, setCart } = useContext(cartContext);
+
+  // Wishlist state
+  const [isWishlisted, setIsWishlisted] = useState(false);
+  const [wishlistId, setWishlistId] = useState(null);
+
+  // Check if product is in wishlist on mount
+  useEffect(() => {
+    const checkWishlist = async () => {
+      try {
+        const response = await getUserWishlist();
+        if (response.success && response.wishlist) {
+          const found = response.wishlist.find(
+            (item) => item.product.id === product.id
+          );
+          if (found) {
+            setIsWishlisted(true);
+            setWishlistId(found.id);
+          } else {
+            setIsWishlisted(false);
+            setWishlistId(null);
+          }
+        }
+      } catch {
+        // ignore
+      }
+    };
+    checkWishlist();
+  }, [product.id]);
+
+  const handleWishlistToggle = async () => {
+    if (isWishlisted && wishlistId) {
+      // Remove from wishlist
+      try {
+        const response = await deleteWishlistItem(wishlistId);
+        if (response.success) {
+          setIsWishlisted(false);
+          setWishlistId(null);
+        }
+      } catch {
+        alert("Failed to remove from wishlist.");
+      }
+    } else {
+      // Add to wishlist
+     try {
+  const response = await addToWishlist(product.id);
+  if (response.success) {
+    setIsWishlisted(true);
+    setWishlistId(response.wishlistEntry.id);
+  } else if (response.message === "Product already in wishlist") {
+    alert("Product is already in your wishlist.");
+  }
+} catch {
+  alert("Failed to add to wishlist.");
+}
+    }
+  };
 
   const addToCart = useCallback(async () => {
     if (sizes.length === 0 || quantity === 0) {
@@ -46,9 +101,6 @@ export const ProductCard = ({ product }) => {
 
     // Extract sizeName from product.sizes
     const extractedSizes = product.sizes.map((size) => size.sizeName);
-    console.log("Extracted sizes:", extractedSizes);
-    console.log("Cart state:", cart); // Debugging log
-
     setSizes(extractedSizes);
     setLoading(false);
   }, [product, cart]);
@@ -95,7 +147,7 @@ export const ProductCard = ({ product }) => {
       <button
         style={{ fontFamily: '"Bebas Neue", sans-serif' }}
         onClick={addToCart}
-        disabled={quantity === 0} // Disable if quantity is 0
+        disabled={quantity === 0}
         title={quantity === 0 ? "Please select a quantity" : ""}
         aria-label="Add to cart"
         className={`bg-black text-white rounded-2xl hover:bg-white hover:text-black hover:border-1 p-2 mb-2 w-[90px] h-[40px]  ${
@@ -105,7 +157,13 @@ export const ProductCard = ({ product }) => {
         Add to cart
       </button>
       <QtyButton />
-      <Heart/>
+      <button onClick={handleWishlistToggle} aria-label="Toggle wishlist">
+        {isWishlisted ? (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="red" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart-icon lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        ) : (
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart-icon lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        )}
+      </button>
     </div>
   );
 };
