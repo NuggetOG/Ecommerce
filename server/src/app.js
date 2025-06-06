@@ -9,6 +9,7 @@ const userRoutes = require('./Routes/userRoutes');
 const productRoutes = require('./Routes/productRoutes');
 const cartRoutes = require('./Routes/cartRoutes');
 const wishlistRoutes = require('./Routes/wishlistRoute');
+const orderRoutes = require('./Routes/orderRoutes');
 
 
 const app = express();
@@ -31,7 +32,7 @@ app.use("/api/v1/user", authMiddleware, userRoutes);
 app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/wishlist", wishlistRoutes);
-
+app.use("/api/v1/order", authMiddleware, orderRoutes);
 
 
 app.all('*', (req,res) => {

@@ -25,6 +25,7 @@ model User{
   Wishlist Wishlist []
   Cart Cart[]
   Interactions Interactions[]
+  orders Order[]
 }
 
 model Product {
@@ -39,6 +40,7 @@ model Product {
   Wishlist Wishlist[]
   Cart Cart[]
   Interactions Interactions[] 
+  orderItems OrderItem[] // Each product can be part of multiple order items
 }
 
 model Size {
@@ -48,6 +50,7 @@ model Size {
   productId  Int
   product    Product @relation(fields: [productId], references: [id])
   cart Cart[]
+  orderItems OrderItem[] // Each size can be part of multiple order items
 }
 
 model Wishlist {
@@ -77,4 +80,26 @@ model Interactions {
   createdAt DateTime @default(now())
   user User @relation(fields:[userId], references: [id])
   product Product @relation(fields:[productId], references: [id])
+}
+
+model Order {
+  id         Int         @id @default(autoincrement())
+  userId     Int
+  totalPrice Float
+  status    String      @default("PENDING")  // e.g., pending, approved, completed, cancelled
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt 
+  user       User        @relation(fields: [userId], references: [id])
+  items      OrderItem[] // Each order can contain multiple items
+}
+
+model OrderItem {
+  id         Int      @id @default(autoincrement())
+  orderId    Int
+  productId  Int
+  sizeId     Int
+  quantity   Int
+  order      Order    @relation(fields: [orderId], references: [id])
+  product    Product  @relation(fields: [productId], references: [id])
+  size       Size     @relation(fields: [sizeId], references: [id])
 }

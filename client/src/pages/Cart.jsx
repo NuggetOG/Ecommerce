@@ -3,12 +3,14 @@ import { cartContext } from "../context/cartContext";
 import { getCartItems, deleteCartItem } from "../api/cart";
 import { useNavigate } from "react-router-dom";
 import { QtyButton } from "../components/QtyButton";
-
+import { quantityContext } from "../context/quantityContext";
 export const Cart = () => {
-  const navigate = useNavigate();
   const { cart, setCart } = useContext(cartContext);
+  const { setQuantity } = useContext(quantityContext);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -29,6 +31,19 @@ export const Cart = () => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    if (!Array.isArray(cart) || cart.length === 0) {
+      setTotal(0);
+      return;
+    }
+    const totalAmount = cart.reduce((acc, item) => {
+      const price = item.product?.price || 0;
+      return acc + price * item.quantity;
+    }, 0);
+    setTotal(totalAmount);
+    console.log("Total amount:", totalAmount);
+  }, [cart]);
+
   const removeFromCart = async (cartId) => {
     try {
       const response = await deleteCartItem(cartId);
@@ -37,12 +52,10 @@ export const Cart = () => {
       } else {
         setError("Failed to remove item from cart");
       }
-    } catch{
+    } catch {
       setError("Something went wrong in removing item from cart");
     }
   };
-
-
 
   if (loading) {
     return <p className="text-center p-5">Loading cart...</p>;
@@ -79,11 +92,19 @@ export const Cart = () => {
               alt={item.product.productName}
               className="h-40 w-40 object-cover rounded-lg mb-4"
             />
-            <h2 className="text-xl font-bold mb-2 text-center">{item.product.productName}</h2>
-            <p className="mb-1"><span className="font-semibold">Size:</span> {item.size.sizeName}</p>
-            <p className="mb-1"><span className="font-semibold">Quantity:</span> {item.quantity}</p>
-                  <QtyButton/>
-            <p className="mb-3"><span className="font-semibold">Price:</span> ₹{item.product.price}</p>
+            <h2 className="text-xl font-bold mb-2 text-center">
+              {item.product.productName}
+            </h2>
+            <p className="mb-1">
+              <span className="font-semibold">Size:</span>{" "}
+              {item.size.sizeName}
+            </p>
+            <p className="mb-1">
+              <span className="font-semibold">Quantity:</span> {item.quantity}
+            </p>
+            <p className="mb-3">
+              <span className="font-semibold">Price:</span> ₹{item.product.price}
+            </p>
             <button
               className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition"
               onClick={() => removeFromCart(item.id)}
@@ -92,6 +113,12 @@ export const Cart = () => {
             </button>
           </div>
         ))}
+      </div>
+      {/* Responsive Grand Total */}
+      <div className="mt-6 flex flex-col md:flex-row justify-end items-center">
+        <span className="text-lg md:text-xl font-bold">
+          Grand Total: ₹{total}
+        </span>
       </div>
     </div>
   );

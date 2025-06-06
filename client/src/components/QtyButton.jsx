@@ -1,9 +1,7 @@
-import React from "react";
-import { useContext } from "react";
-import { quantityContext } from "../context/quantityContext";
+import React, { useState } from "react";
 
 export const QtyButton = () => {
-  const { quantity, setQuantity } = useContext(quantityContext);
+  const [quantity, setQuantity ] = useState(0);
   const increment = () => setQuantity((prev) => prev + 1);
   const decrement = () => {
     if (quantity > 0) setQuantity((prev) => prev - 1);

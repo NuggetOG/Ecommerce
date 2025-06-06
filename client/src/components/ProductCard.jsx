@@ -1,5 +1,4 @@
 import React, { useCallback, useState, useEffect, useContext } from "react";
-import { QtyButton } from "./QtyButton";
 import { Dropdown } from "./Dropdown";
 import { cartContext } from "../context/cartContext";
 import { quantityContext } from "../context/quantityContext";
@@ -49,23 +48,25 @@ export const ProductCard = ({ product }) => {
         if (response.success) {
           setIsWishlisted(false);
           setWishlistId(null);
+          alert("Removed from wishlist");
         }
       } catch {
         alert("Failed to remove from wishlist.");
       }
     } else {
       // Add to wishlist
-     try {
-  const response = await addToWishlist(product.id);
-  if (response.success) {
-    setIsWishlisted(true);
-    setWishlistId(response.wishlistEntry.id);
-  } else if (response.message === "Product already in wishlist") {
-    alert("Product is already in your wishlist.");
-  }
-} catch {
-  alert("Failed to add to wishlist.");
-}
+      try {
+        const response = await addToWishlist(product.id);
+        if (response.success) {
+          setIsWishlisted(true);
+          setWishlistId(response.wishlistEntry.id);
+          alert("Added to wishlist");
+        } else if (response.message === "Product already in wishlist") {
+          alert("Product is already in your wishlist.");
+        }
+      } catch {
+        alert("Failed to add to wishlist.");
+      }
     }
   };
 
@@ -86,6 +87,7 @@ export const ProductCard = ({ product }) => {
       // Update cart state after successful backend call
       setCart((prev) => [...prev, cartItem]);
       console.log("Added to cart:", cartItem);
+      alert("Added to cart");
     } catch (error) {
       console.error("Error adding to cart:", error);
       alert("Failed to add item to cart. Please try again.");
@@ -150,18 +152,57 @@ export const ProductCard = ({ product }) => {
         disabled={quantity === 0}
         title={quantity === 0 ? "Please select a quantity" : ""}
         aria-label="Add to cart"
-        className={`bg-black text-white rounded-2xl hover:bg-white hover:text-black hover:border-1 p-2 mb-2 w-[90px] h-[40px]  ${
+        className={`bg-black text-white rounded-2xl hover:bg-white hover:text-black hover:border-1 p-2 mb-2 w-[90px] h-[40px] ${
           quantity === 0 ? "cursor-not-allowed" : ""
         }`}
       >
         Add to cart
       </button>
-      <QtyButton />
+      {/* Embedded Quantity Controls */}
+      <div className="flex items-center gap-2 justify-center mb-2">
+        <button
+          onClick={() => setQuantity(Math.max(1, quantity - 1))}
+          className="px-3 py-1 bg-gray-300 rounded-md"
+        >
+          -
+        </button>
+        <span>{quantity}</span>
+        <button
+          onClick={() => setQuantity(quantity + 1)}
+          className="px-3 py-1 bg-gray-300 rounded-md"
+        >
+          +
+        </button>
+      </div>
       <button onClick={handleWishlistToggle} aria-label="Toggle wishlist">
         {isWishlisted ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="red" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart-icon lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="red"
+            stroke="black"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-heart-icon lucide-heart"
+          >
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+          </svg>
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-heart-icon lucide-heart"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="lucide lucide-heart-icon lucide-heart"
+          >
+            <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+          </svg>
         )}
       </button>
     </div>

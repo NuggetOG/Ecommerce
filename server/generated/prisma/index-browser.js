@@ -169,6 +169,23 @@ exports.Prisma.InteractionsScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.OrderScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  totalPrice: 'totalPrice',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.OrderItemScalarFieldEnum = {
+  id: 'id',
+  orderId: 'orderId',
+  productId: 'productId',
+  sizeId: 'sizeId',
+  quantity: 'quantity'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -186,7 +203,9 @@ exports.Prisma.ModelName = {
   Size: 'Size',
   Wishlist: 'Wishlist',
   Cart: 'Cart',
-  Interactions: 'Interactions'
+  Interactions: 'Interactions',
+  Order: 'Order',
+  OrderItem: 'OrderItem'
 };
 
 /**

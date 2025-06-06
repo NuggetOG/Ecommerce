@@ -28,4 +28,27 @@ const getUserInfo = async (req, res) => {
     res.status(500).json({ message: "Server error", success :true,user});
   }
 };
-module.exports = {getUserInfo};
+const updateUserById = async (req, res) => {
+  try {
+    const { firstName, lastName, email } = req.body;
+    if (!firstName || !lastName || !email) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const updatedUser = await prisma.user.update({
+      where: { id: req.user.id },
+      data: { firstName, lastName, email },
+    });
+
+    return res.status(200).json({
+      message: "User updated successfully",
+      data: {
+        name: `${updatedUser.firstName} ${updatedUser.lastName}`,
+        email: updatedUser.email,
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", success :true,user});
+  }
+};
+module.exports = {getUserInfo,updateUserById};

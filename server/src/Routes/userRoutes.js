@@ -1,9 +1,14 @@
 const express = require('express');
-const { getUserInfo } = require('../Controllers/userController');
+const { getUserInfo,updateUserById } = require('../Controllers/userController');
 const authMiddleware = require('../Middlewares/authMiddleware');
 
 const router = express.Router();
 
-router.get("/me",authMiddleware,getUserInfo);
-
+router
+    .route('/')
+    .get(authMiddleware, getUserInfo); // Get user info
+router
+    .route('/:userId')
+    .put(authMiddleware, updateUserById); // Update user info by ID
 module.exports = router;
+

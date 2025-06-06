@@ -29,7 +29,7 @@ Content-Type: application/json
       "productName": "Men's Classic Black Tee",
       "price": 999,
       "category": "men",
-      "imageUrl": "https://example.com/images/mens-black-tee.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=500&auto=format",
       "sizes": [
         { "sizeName": "S", "quantity": 10 },
         { "sizeName": "M", "quantity": 15 },
@@ -40,7 +40,7 @@ Content-Type: application/json
       "productName": "Men's White Polo Shirt",
       "price": 1299,
       "category": "men",
-      "imageUrl": "https://example.com/images/mens-white-polo.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1588359348347-9bc6cbbb689e?w=500&auto=format",
       "sizes": [
         { "sizeName": "M", "quantity": 12 },
         { "sizeName": "L", "quantity": 10 },
@@ -51,7 +51,7 @@ Content-Type: application/json
       "productName": "Men's Navy Blue Henley",
       "price": 1199,
       "category": "men",
-      "imageUrl": "https://example.com/images/mens-navy-henley.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=500&auto=format",
       "sizes": [
         { "sizeName": "S", "quantity": 8 },
         { "sizeName": "M", "quantity": 14 },
@@ -62,7 +62,7 @@ Content-Type: application/json
       "productName": "Men's Olive Green Tee",
       "price": 1099,
       "category": "men",
-      "imageUrl": "https://example.com/images/mens-olive-tee.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1529374814797-1dfbfed6a1f6?w=500&auto=format",
       "sizes": [
         { "sizeName": "M", "quantity": 11 },
         { "sizeName": "L", "quantity": 13 },
@@ -73,7 +73,7 @@ Content-Type: application/json
       "productName": "Men's Charcoal V-Neck",
       "price": 999,
       "category": "men",
-      "imageUrl": "https://example.com/images/mens-charcoal-vneck.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=500&auto=format",
       "sizes": [
         { "sizeName": "S", "quantity": 10 },
         { "sizeName": "M", "quantity": 12 },
@@ -84,7 +84,7 @@ Content-Type: application/json
       "productName": "Women's Slim Fit Pink Tee",
       "price": 899,
       "category": "women",
-      "imageUrl": "https://example.com/images/womens-pink.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=500&auto=format",
       "sizes": [
         { "sizeName": "S", "quantity": 12 },
         { "sizeName": "M", "quantity": 10 },
@@ -95,7 +95,7 @@ Content-Type: application/json
       "productName": "Women's Crop Top White",
       "price": 799,
       "category": "women",
-      "imageUrl": "https://example.com/images/womens-crop-white.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1456885284447-7dd4bb8720bf?w=500&auto=format",
       "sizes": [
         { "sizeName": "S", "quantity": 14 },
         { "sizeName": "M", "quantity": 9 }
@@ -105,7 +105,7 @@ Content-Type: application/json
       "productName": "Women's Oversized Black Tee",
       "price": 999,
       "category": "women",
-      "imageUrl": "https://example.com/images/womens-oversized-black.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1503342394128-c104d54dba01?w=500&auto=format",
       "sizes": [
         { "sizeName": "M", "quantity": 11 },
         { "sizeName": "L", "quantity": 7 },
@@ -116,7 +116,7 @@ Content-Type: application/json
       "productName": "Unisex Oversized Beige Tee",
       "price": 1099,
       "category": "unisex",
-      "imageUrl": "https://example.com/images/unisex-beige.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=500&auto=format",
       "sizes": [
         { "sizeName": "M", "quantity": 20 },
         { "sizeName": "L", "quantity": 15 },
@@ -127,17 +127,128 @@ Content-Type: application/json
       "productName": "Unisex Graphic Black Tee",
       "price": 1199,
       "category": "unisex",
-      "imageUrl": "https://example.com/images/unisex-graphic-black.jpg",
+      "imageUrl": "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=500&auto=format",
       "sizes": [
         { "sizeName": "S", "quantity": 18 },
         { "sizeName": "M", "quantity": 16 },
         { "sizeName": "L", "quantity": 12 }
       ]
+    },
+    {
+      "productName": "Women's Floral Blouse",
+      "price": 1499,
+      "category": "women",
+      "imageUrl": "https://images.unsplash.com/photo-1499939667766-4afceb292d05?w=500&auto=format",
+      "sizes": [
+        { "sizeName": "S", "quantity": 8 },
+        { "sizeName": "M", "quantity": 12 },
+        { "sizeName": "L", "quantity": 6 }
+      ]
+    },
+    {
+      "productName": "Men's Denim Button-Up",
+      "price": 1899,
+      "category": "men",
+      "imageUrl": "https://images.unsplash.com/photo-1589310243389-96a5483213a8?w=500&auto=format",
+      "sizes": [
+        { "sizeName": "M", "quantity": 9 },
+        { "sizeName": "L", "quantity": 11 },
+        { "sizeName": "XL", "quantity": 8 }
+      ]
+    },
+    {
+      "productName": "Women's Striped Tee",
+      "price": 949,
+      "category": "women",
+      "imageUrl": "https://images.unsplash.com/photo-1551163943-3f7253a97449?w=500&auto=format",
+      "sizes": [
+        { "sizeName": "XS", "quantity": 7 },
+        { "sizeName": "S", "quantity": 12 },
+        { "sizeName": "M", "quantity": 9 }
+      ]
+    },
+    {
+      "productName": "Men's Athletic Gray Tee",
+      "price": 1099,
+      "category": "men",
+      "imageUrl": "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=500&auto=format",
+      "sizes": [
+        { "sizeName": "S", "quantity": 9 },
+        { "sizeName": "M", "quantity": 15 },
+        { "sizeName": "L", "quantity": 12 },
+        { "sizeName": "XL", "quantity": 6 }
+      ]
+    },
+    {
+      "productName": "Unisex Tie-Dye Shirt",
+      "price": 1299,
+      "category": "unisex",
+      "imageUrl": "https://images.unsplash.com/photo-1626266799523-79a203efbd9c?w=500&auto=format",
+      "sizes": [
+        { "sizeName": "S", "quantity": 8 },
+        { "sizeName": "M", "quantity": 14 },
+        { "sizeName": "L", "quantity": 10 }
+      ]
+    },
+    {
+      "productName": "Women's Casual White Button-Up",
+      "price": 1399,
+      "category": "women",
+      "imageUrl": "https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?w=500&auto=format",
+      "sizes": [
+        { "sizeName": "S", "quantity": 11 },
+        { "sizeName": "M", "quantity": 9 },
+        { "sizeName": "L", "quantity": 7 }
+      ]
+    },
+    {
+      "productName": "Men's Red Plaid Flannel",
+      "price": 1699,
+      "category": "men",
+      "imageUrl": "https://images.unsplash.com/photo-1589992896844-9b720813d1cb?w=500&auto=format",
+      "sizes": [
+        { "sizeName": "M", "quantity": 12 },
+        { "sizeName": "L", "quantity": 14 },
+        { "sizeName": "XL", "quantity": 10 }
+      ]
+    },
+    {
+      "productName": "Women's Black Turtleneck",
+      "price": 1599,
+      "category": "women",
+      "imageUrl": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=500&auto=format",
+      "sizes": [
+        { "sizeName": "S", "quantity": 9 },
+        { "sizeName": "M", "quantity": 11 },
+        { "sizeName": "L", "quantity": 8 }
+      ]
+    },
+    {
+      "productName": "Unisex Vintage Washed Tee",
+      "price": 999,
+      "category": "unisex",
+      "imageUrl": "https://images.unsplash.com/photo-1574180566232-aaad1b5b8450?w=500&auto=format",
+      "sizes": [
+        { "sizeName": "S", "quantity": 12 },
+        { "sizeName": "M", "quantity": 16 },
+        { "sizeName": "L", "quantity": 10 }
+      ]
+    },
+    {
+      "productName": "Men's Summer Linen Shirt",
+      "price": 1799,
+      "category": "men",
+      "imageUrl": "https://images.unsplash.com/photo-1626557981101-aae6f84aa6ff?w=500&auto=format",
+      "sizes": [
+        { "sizeName": "M", "quantity": 8 },
+        { "sizeName": "L", "quantity": 12 },
+        { "sizeName": "XL", "quantity": 7 }
+      ]
     }
   ]
 }
-
-
+###
+GET http://localhost:5000/api/v1/product/31
 ###
 GET http://localhost:5000/api/v1/product
 ###
@@ -189,7 +300,7 @@ Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2Njg5N
 Content-Type: application/json
 
 {
-  "productId": 8
+  "productId": 30
 }
 
 ### 🛒 Get User Wishlist
@@ -197,5 +308,5 @@ GET http://localhost:5000/api/v1/wishlist/
 Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2Njg5NjAzLCJleHAiOjE3NDY3NzYwMDN9.TCWgpv2iZL1Ve8hafihp4RyZV-M3OOXk1JLmYPnAfzU
 
 ### ❌ Delete Wishlist Item
-DELETE http://localhost:5000/api/v1/wishlist/delete/1
+DELETE http://localhost:5000/api/v1/wishlist/delete/6
 Cookie: token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNzQ2Njg5NjAzLCJleHAiOjE3NDY3NzYwMDN9.TCWgpv2iZL1Ve8hafihp4RyZV-M3OOXk1JLmYPnAfzU
