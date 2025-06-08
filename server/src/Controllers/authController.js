@@ -17,7 +17,7 @@ const registerUser = async (req, res) => {
         });
 
         if (existing) {
-            return res.status(401).json({ message: "Email already registered" });
+            return res.status(401).json({ success :"false",message: "Email already registered" });
         }
 
         // Hash Password

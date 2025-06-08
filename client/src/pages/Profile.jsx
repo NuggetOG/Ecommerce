@@ -2,8 +2,9 @@ import { useContext } from "react";
 import { currentUserContext } from "../context/authContext";
 import { cartContext } from "../context/cartContext";
 import { Link, useNavigate } from "react-router-dom";
-
+import { orderContext } from "../context/orderContext";
 export const Profile = () => {
+  const { order } = useContext(orderContext);
   const { currentUser, setCurrentUser } = useContext(currentUserContext);
   const { cart } = useContext(cartContext);
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export const Profile = () => {
 
       <div className="text-center space-y-4 text-gray-700">
         <p className="text-lg font-medium">📧 Email: <span className="font-semibold">{user?.email || "Not Available"}</span></p>
-        <p className="text-lg font-medium">📦 Orders: <span className="font-semibold">0</span></p>
+        <p className="text-lg font-medium">📦 Orders: <span className="font-semibold">{order?.length || 0}</span></p>
         <p className="text-lg font-medium">🛒 Cart Items: <span className="font-semibold">{cart?.length ?? 0}</span></p>
         <p className="text-lg font-medium">💖 Wishlist Items: <span className="font-semibold">{user?.wishlist?.length ?? 0}</span></p>
         <p className="text-sm text-gray-500 italic">

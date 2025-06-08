@@ -1,5 +1,6 @@
 const { prisma } = require("../prisma");
 const { sendOrderConfirmationEmail } = require("../Utils/emailConfirmation");
+
 const createOrder = async (req, res) => {
   try {
     const userId = req.user.id;
@@ -75,7 +76,7 @@ const getUserOrders = async(req,res)=>{
                 }
             }
         });
-        return res.status(200).json({ success: true, orders });
+        return res.status(200).json({ success: true, orders});
     } catch (error) {
         console.error('Error fetching user orders:', error);
         return res.status(500).json({ success: false, message: `Internal server error: ${error.message}` });
@@ -151,7 +152,7 @@ const approveOrder = async (req, res) => {
 
 const pendingOrder = async(req,res)=>{
     try {
-        const orderId = Number(req.params.id);
+        const orderId = Number(req.params.OrderId);
         if (orderId <= 0 || isNaN(orderId)) {
             return res.status(400).json({ success: false, message: "Invalid order ID" });
         }
@@ -172,11 +173,49 @@ const pendingOrder = async(req,res)=>{
         return res.status(500).json({ success: false, message: `Internal server error: ${error.message}` });
     }
 }
+const deleteOrder = async (req, res) => {
+  try {
+    const orderId = Number(req.params.orderId);
+    console.log("Order ID received:", orderId); // Debugging
+
+    if (!orderId || isNaN(orderId) || orderId <= 0) {
+      console.log("Invalid order ID"); // Debugging
+      return res.status(400).json({ success: false, message: "Invalid order ID" });
+    }
+
+    // Check if the order exists
+    const order = await prisma.order.findUnique({ where: { id: orderId } });
+    console.log("Order fetched from DB:", order); // Debugging
+
+    if (!order) {
+      console.log("Order not found"); // Debugging
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+
+    // Delete the order
+    const deletedOrderItems = await prisma.orderItem.deleteMany({
+      where: { orderId },
+    });
+    console.log("Order items deleted successfully:", deletedOrderItems); // Debugging
+    const deletedOrder = await prisma.order.delete({
+      where: { id: orderId },
+    });
+    console.log("Order deleted successfully:", deletedOrder); // Debugging
+
+    return res.status(200).json({ success: true, message: "Order deleted successfully", order: deletedOrder });
+  } catch (error) {
+    console.error("Error deleting order:", error); // Debugging
+    return res.status(500).json({ success: false, message: `Internal server error: ${error.message}` });
+  }
+};
+// ✅ Exporting the functions
+
 module.exports = {
     approveOrder,
     createOrder,
     getUserOrders,
     getOrderById,
-    pendingOrder
+    pendingOrder,
+    deleteOrder
 };
 

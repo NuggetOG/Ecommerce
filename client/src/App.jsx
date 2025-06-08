@@ -17,9 +17,12 @@ import { PrivateRoute } from './components/PrivateRoute';
 import { CurrentUserProvider } from './context/authContext';
 import { CartProvider } from './context/cartContext';
 import { QuantityProvider } from './context/quantityContext';
+import OrderProvider from './context/orderContext';
+import { Orders } from './pages/orders';
 
 function App() {
   return (
+    <OrderProvider>
   <QuantityProvider>
     <CartProvider>
       <CurrentUserProvider>
@@ -33,6 +36,7 @@ function App() {
             <Route path="Men" element={<Men />} />
             <Route path="women" element={<Women />} />
           </Route>
+          <Route path="/orders" element={<PrivateRoute><Orders /></PrivateRoute>} />
           <Route path="/cart" element={<PrivateRoute><Cart /></PrivateRoute>} />
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/signup" element={<Signup />} />
@@ -41,6 +45,7 @@ function App() {
       </CurrentUserProvider>
     </CartProvider>
   </QuantityProvider>
+  </OrderProvider>
   );
 }
 

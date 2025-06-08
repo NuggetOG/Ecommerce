@@ -159,14 +159,14 @@ export const ProductCard = ({ product }) => {
         Add to cart
       </button>
       {/* Embedded Quantity Controls */}
-      <div className="flex items-center gap-2 justify-center mb-2">
+      <div className="flex items-center gap-2 justify-center mb-2 ">
         <button
           onClick={() => setQuantity(Math.max(1, quantity - 1))}
           className="px-3 py-1 bg-gray-300 rounded-md"
         >
           -
         </button>
-        <span>{quantity}</span>
+        <span className="">{quantity}</span>
         <button
           onClick={() => setQuantity(quantity + 1)}
           className="px-3 py-1 bg-gray-300 rounded-md"

@@ -2,6 +2,8 @@ import { registerUser, loginUser } from "../api/auth";
 import { useEffect, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { currentUserContext } from "../context/authContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Signup = () => {
   const navigate = useNavigate();
@@ -21,22 +23,28 @@ export const Signup = () => {
   });
 
   async function handleSubmit(e) {
-    e.preventDefault();
-    try {
-      const registrationData = await registerUser(formData);
-      console.log("User registered successfully:", registrationData);
-
-      const loginResponse = await loginUser({
-        email: formData.email,
-        password: formData.password
-      });
-      console.log("User login successful:", JSON.stringify(loginResponse));
-
-      setCurrentUser(loginResponse);
-    } catch (error) {
-      console.log("Error in registering user:", error.message);
+  e.preventDefault();
+  try {
+    const registrationData = await registerUser(formData);
+    if (!registrationData.success) {
+      console.log("Registration failed:", registrationData.message);
+      return;
     }
+    console.log("User registered successfully:", registrationData);
+
+    const loginResponse = await loginUser({
+      email: formData.email,
+      password: formData.password,
+    });
+    console.log("User login successful:", JSON.stringify(loginResponse));
+
+    setCurrentUser(loginResponse);
+  } catch (error) {
+    console.log("Error in registering user:", error.message);
+          toast.error("email already exists"); // Pass the error message directly to the toast
+
   }
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center text-gray-100 px-4"
@@ -44,6 +52,7 @@ export const Signup = () => {
       backgroundImage:
         'url("/images/coolest.png")',
     }}>
+          <ToastContainer /> {/* Add ToastContainer */}
       <div className=" bg-opacity-20 w-full max-w-md p-8 rounded-xl shadow-md space-y-6">
         <h2 className="text-3xl font-bold text-center text-green-800">Create Account</h2>
         <form onSubmit={handleSubmit} className="space-y-4">

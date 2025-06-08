@@ -1,14 +1,17 @@
 const nodemailer = require("nodemailer");
+require("dotenv").config({ path: "/home/kartikey/Desktop/blacro/server/.env" });
 
 async function sendOrderConfirmationEmail(toEmail, order) {
   try {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: "joshikartieky32@gmail.com",
-        pass: process.env.GMAIL_APP_PASSWORD,
+      user: "blacro27@gmail.com",
+      pass: process.env.GMAIL_APP_PASSWORD, // Use the generated App Password here
       },
     });
+        console.log("GMAIL_APP_PASSWORD:", process.env.GMAIL_APP_PASSWORD);
+
 
     const mailOptions = {
       from: '"Blacro" <no-reply@blacro.com>',

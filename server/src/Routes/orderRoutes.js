@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const checkAdmin = require("../Middlewares/checkAdmin");
-const { approveOrder, createOrder, getUserOrders, getOrderById, pendingOrder } = require("../Controllers/orderController");
+const { approveOrder, createOrder, getUserOrders, getOrderById, pendingOrder, deleteOrder } = require("../Controllers/orderController");
 const authMiddleware = require("../Middlewares/authMiddleware");
 
 // Pass the admin email correctly to the middleware
@@ -23,5 +23,8 @@ router
 router
   .route("/:orderId/approve")
   .put(authMiddleware,adminCheckMiddleware, approveOrder);
+router
+  .route("/:orderId/delete")
+  .delete(authMiddleware, deleteOrder);
 
 module.exports = router;

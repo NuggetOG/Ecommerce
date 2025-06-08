@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { cartContext } from "../context/cartContext";
 import { getCartItems, deleteCartItem } from "../api/cart";
+import { createOrder } from "../api/order";
 import { useNavigate } from "react-router-dom";
-import { QtyButton } from "../components/QtyButton";
-import { quantityContext } from "../context/quantityContext";
+import { orderContext } from "../context/orderContext";
+
 export const Cart = () => {
+  const {order,setOrder} = useContext(orderContext);
   const { cart, setCart } = useContext(cartContext);
-  const { setQuantity } = useContext(quantityContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -43,6 +44,24 @@ export const Cart = () => {
     setTotal(totalAmount);
     console.log("Total amount:", totalAmount);
   }, [cart]);
+
+  const create_order = async () => {
+    try {
+      const response = await createOrder();
+      if (response.success) {
+        setOrder(response.order);
+        console.log("Order created successfully:", order);
+        alert("Order request placed successfully wait for confirmation!");
+        //put approve order here for automation
+        setCart([]); // Clear cart after successful order
+        navigate("/orders"); // Redirect to orders page
+      } else {
+        setError("Failed to create order");
+      }
+    } catch {
+      setError("Something went wrong in creating order");
+    }
+  };
 
   const removeFromCart = async (cartId) => {
     try {
@@ -119,6 +138,12 @@ export const Cart = () => {
         <span className="text-lg md:text-xl font-bold">
           Grand Total: ₹{total}
         </span>
+        <button
+          className="ml-0 md:ml-4 mt-4 md:mt-0 bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded transition"
+          onClick={create_order}
+        >
+          Proceed to Checkout
+        </button>
       </div>
     </div>
   );
