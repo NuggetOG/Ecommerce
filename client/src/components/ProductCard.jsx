@@ -139,12 +139,7 @@ export const ProductCard = ({ product }) => {
       </div>
       <div className="flex gap-5 mt-2 justify-center">
         <h3 className="antialiased italic text-xl mt-2">Rs.{product.price}</h3>
-        <button
-          className="bg-black rounded-2xl hover:bg-white hover:text-black hover:border-1 p-2 mb-2 w-[90px] h-[40px] text-white"
-          style={{ fontFamily: '"Bebas Neue", sans-serif' }}
-        >
-          Buy now
-        </button>
+      
       </div>
       <button
         style={{ fontFamily: '"Bebas Neue", sans-serif' }}

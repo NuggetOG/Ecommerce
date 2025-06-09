@@ -173,6 +173,10 @@ exports.Prisma.OrderScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   totalPrice: 'totalPrice',
+  razorpayOrderId: 'razorpayOrderId',
+  paymentId: 'paymentId',
+  paymentSignature: 'paymentSignature',
+  paymentDate: 'paymentDate',
   status: 'status',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -194,6 +198,11 @@ exports.Prisma.SortOrder = {
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 
 

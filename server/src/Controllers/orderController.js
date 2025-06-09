@@ -1,10 +1,11 @@
 const { prisma } = require("../prisma");
+const { instance } = require("../razorpayInstance");
 const { sendOrderConfirmationEmail } = require("../Utils/emailConfirmation");
 
 const createOrder = async (req, res) => {
   try {
     const userId = req.user.id;
-
+ 
     // Fetch cart items from DB for this user
     const cartItems = await prisma.cart.findMany({
       where: { userId },
@@ -27,6 +28,14 @@ const createOrder = async (req, res) => {
     if (totalAmount <= 0) {
       return res.status(400).json({ success: false, message: "Invalid total amount" });
     }
+      const receipt = `receipt_${Date.now()}_${req.body.userId}`;
+
+    // Create Razorpay order
+       const razorpayOrder = await instance.orders.create({
+      amount: totalAmount * 100, // Amount in smallest currency unit (e.g., paise for INR)
+      currency: "INR",
+      receipt, // Optional, can be used to track payments
+    });
 
     // Create the order
     const order = await prisma.order.create({
@@ -34,6 +43,7 @@ const createOrder = async (req, res) => {
         userId,
         totalPrice: totalAmount,
         status: 'PENDING',
+        razorpayOrderId: razorpayOrder.id, // Store Razorpay order ID
     },
     });
 

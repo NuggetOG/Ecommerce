@@ -86,6 +86,10 @@ model Order {
   id         Int         @id @default(autoincrement())
   userId     Int
   totalPrice Float
+  razorpayOrderId String @unique
+  paymentId        String?     // Razorpay payment ID
+  paymentSignature String?     // Razorpay signature
+  paymentDate      DateTime? 
   status    String      @default("PENDING")  // e.g., pending, approved, completed, cancelled
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt 

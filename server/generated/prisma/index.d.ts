@@ -8648,6 +8648,10 @@ export namespace Prisma {
     id: number | null
     userId: number | null
     totalPrice: number | null
+    razorpayOrderId: string | null
+    paymentId: string | null
+    paymentSignature: string | null
+    paymentDate: Date | null
     status: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -8657,6 +8661,10 @@ export namespace Prisma {
     id: number | null
     userId: number | null
     totalPrice: number | null
+    razorpayOrderId: string | null
+    paymentId: string | null
+    paymentSignature: string | null
+    paymentDate: Date | null
     status: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -8666,6 +8674,10 @@ export namespace Prisma {
     id: number
     userId: number
     totalPrice: number
+    razorpayOrderId: number
+    paymentId: number
+    paymentSignature: number
+    paymentDate: number
     status: number
     createdAt: number
     updatedAt: number
@@ -8689,6 +8701,10 @@ export namespace Prisma {
     id?: true
     userId?: true
     totalPrice?: true
+    razorpayOrderId?: true
+    paymentId?: true
+    paymentSignature?: true
+    paymentDate?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -8698,6 +8714,10 @@ export namespace Prisma {
     id?: true
     userId?: true
     totalPrice?: true
+    razorpayOrderId?: true
+    paymentId?: true
+    paymentSignature?: true
+    paymentDate?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -8707,6 +8727,10 @@ export namespace Prisma {
     id?: true
     userId?: true
     totalPrice?: true
+    razorpayOrderId?: true
+    paymentId?: true
+    paymentSignature?: true
+    paymentDate?: true
     status?: true
     createdAt?: true
     updatedAt?: true
@@ -8803,6 +8827,10 @@ export namespace Prisma {
     id: number
     userId: number
     totalPrice: number
+    razorpayOrderId: string
+    paymentId: string | null
+    paymentSignature: string | null
+    paymentDate: Date | null
     status: string
     createdAt: Date
     updatedAt: Date
@@ -8831,6 +8859,10 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     totalPrice?: boolean
+    razorpayOrderId?: boolean
+    paymentId?: boolean
+    paymentSignature?: boolean
+    paymentDate?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8843,6 +8875,10 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     totalPrice?: boolean
+    razorpayOrderId?: boolean
+    paymentId?: boolean
+    paymentSignature?: boolean
+    paymentDate?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8853,6 +8889,10 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     totalPrice?: boolean
+    razorpayOrderId?: boolean
+    paymentId?: boolean
+    paymentSignature?: boolean
+    paymentDate?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -8863,12 +8903,16 @@ export namespace Prisma {
     id?: boolean
     userId?: boolean
     totalPrice?: boolean
+    razorpayOrderId?: boolean
+    paymentId?: boolean
+    paymentSignature?: boolean
+    paymentDate?: boolean
     status?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "totalPrice" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "totalPrice" | "razorpayOrderId" | "paymentId" | "paymentSignature" | "paymentDate" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     items?: boolean | Order$itemsArgs<ExtArgs>
@@ -8891,6 +8935,10 @@ export namespace Prisma {
       id: number
       userId: number
       totalPrice: number
+      razorpayOrderId: string
+      paymentId: string | null
+      paymentSignature: string | null
+      paymentDate: Date | null
       status: string
       createdAt: Date
       updatedAt: Date
@@ -9322,6 +9370,10 @@ export namespace Prisma {
     readonly id: FieldRef<"Order", 'Int'>
     readonly userId: FieldRef<"Order", 'Int'>
     readonly totalPrice: FieldRef<"Order", 'Float'>
+    readonly razorpayOrderId: FieldRef<"Order", 'String'>
+    readonly paymentId: FieldRef<"Order", 'String'>
+    readonly paymentSignature: FieldRef<"Order", 'String'>
+    readonly paymentDate: FieldRef<"Order", 'DateTime'>
     readonly status: FieldRef<"Order", 'String'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
     readonly updatedAt: FieldRef<"Order", 'DateTime'>
@@ -10972,6 +11024,10 @@ export namespace Prisma {
     id: 'id',
     userId: 'userId',
     totalPrice: 'totalPrice',
+    razorpayOrderId: 'razorpayOrderId',
+    paymentId: 'paymentId',
+    paymentSignature: 'paymentSignature',
+    paymentDate: 'paymentDate',
     status: 'status',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -11005,6 +11061,14 @@ export namespace Prisma {
   };
 
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -11464,6 +11528,10 @@ export namespace Prisma {
     id?: IntFilter<"Order"> | number
     userId?: IntFilter<"Order"> | number
     totalPrice?: FloatFilter<"Order"> | number
+    razorpayOrderId?: StringFilter<"Order"> | string
+    paymentId?: StringNullableFilter<"Order"> | string | null
+    paymentSignature?: StringNullableFilter<"Order"> | string | null
+    paymentDate?: DateTimeNullableFilter<"Order"> | Date | string | null
     status?: StringFilter<"Order"> | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
@@ -11475,6 +11543,10 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     totalPrice?: SortOrder
+    razorpayOrderId?: SortOrder
+    paymentId?: SortOrderInput | SortOrder
+    paymentSignature?: SortOrderInput | SortOrder
+    paymentDate?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11484,22 +11556,30 @@ export namespace Prisma {
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    razorpayOrderId?: string
     AND?: OrderWhereInput | OrderWhereInput[]
     OR?: OrderWhereInput[]
     NOT?: OrderWhereInput | OrderWhereInput[]
     userId?: IntFilter<"Order"> | number
     totalPrice?: FloatFilter<"Order"> | number
+    paymentId?: StringNullableFilter<"Order"> | string | null
+    paymentSignature?: StringNullableFilter<"Order"> | string | null
+    paymentDate?: DateTimeNullableFilter<"Order"> | Date | string | null
     status?: StringFilter<"Order"> | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     items?: OrderItemListRelationFilter
-  }, "id">
+  }, "id" | "razorpayOrderId">
 
   export type OrderOrderByWithAggregationInput = {
     id?: SortOrder
     userId?: SortOrder
     totalPrice?: SortOrder
+    razorpayOrderId?: SortOrder
+    paymentId?: SortOrderInput | SortOrder
+    paymentSignature?: SortOrderInput | SortOrder
+    paymentDate?: SortOrderInput | SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -11517,6 +11597,10 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Order"> | number
     userId?: IntWithAggregatesFilter<"Order"> | number
     totalPrice?: FloatWithAggregatesFilter<"Order"> | number
+    razorpayOrderId?: StringWithAggregatesFilter<"Order"> | string
+    paymentId?: StringNullableWithAggregatesFilter<"Order"> | string | null
+    paymentSignature?: StringNullableWithAggregatesFilter<"Order"> | string | null
+    paymentDate?: DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
     status?: StringWithAggregatesFilter<"Order"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
@@ -11949,6 +12033,10 @@ export namespace Prisma {
 
   export type OrderCreateInput = {
     totalPrice: number
+    razorpayOrderId: string
+    paymentId?: string | null
+    paymentSignature?: string | null
+    paymentDate?: Date | string | null
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11960,6 +12048,10 @@ export namespace Prisma {
     id?: number
     userId: number
     totalPrice: number
+    razorpayOrderId: string
+    paymentId?: string | null
+    paymentSignature?: string | null
+    paymentDate?: Date | string | null
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11968,6 +12060,10 @@ export namespace Prisma {
 
   export type OrderUpdateInput = {
     totalPrice?: FloatFieldUpdateOperationsInput | number
+    razorpayOrderId?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentSignature?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11979,6 +12075,10 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     totalPrice?: FloatFieldUpdateOperationsInput | number
+    razorpayOrderId?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentSignature?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -11989,6 +12089,10 @@ export namespace Prisma {
     id?: number
     userId: number
     totalPrice: number
+    razorpayOrderId: string
+    paymentId?: string | null
+    paymentSignature?: string | null
+    paymentDate?: Date | string | null
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -11996,6 +12100,10 @@ export namespace Prisma {
 
   export type OrderUpdateManyMutationInput = {
     totalPrice?: FloatFieldUpdateOperationsInput | number
+    razorpayOrderId?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentSignature?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12005,6 +12113,10 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     totalPrice?: FloatFieldUpdateOperationsInput | number
+    razorpayOrderId?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentSignature?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -12464,10 +12576,45 @@ export namespace Prisma {
     productId?: SortOrder
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type OrderCountOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
     totalPrice?: SortOrder
+    razorpayOrderId?: SortOrder
+    paymentId?: SortOrder
+    paymentSignature?: SortOrder
+    paymentDate?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12483,6 +12630,10 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     totalPrice?: SortOrder
+    razorpayOrderId?: SortOrder
+    paymentId?: SortOrder
+    paymentSignature?: SortOrder
+    paymentDate?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12492,6 +12643,10 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     totalPrice?: SortOrder
+    razorpayOrderId?: SortOrder
+    paymentId?: SortOrder
+    paymentSignature?: SortOrder
+    paymentDate?: SortOrder
     status?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12501,6 +12656,38 @@ export namespace Prisma {
     id?: SortOrder
     userId?: SortOrder
     totalPrice?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type OrderScalarRelationFilter = {
@@ -13166,6 +13353,14 @@ export namespace Prisma {
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
   export type UserUpdateOneRequiredWithoutOrdersNestedInput = {
     create?: XOR<UserCreateWithoutOrdersInput, UserUncheckedCreateWithoutOrdersInput>
     connectOrCreate?: UserCreateOrConnectWithoutOrdersInput
@@ -13354,6 +13549,73 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type WishlistCreateWithoutUserInput = {
     product: ProductCreateNestedOneWithoutWishlistInput
   }
@@ -13421,6 +13683,10 @@ export namespace Prisma {
 
   export type OrderCreateWithoutUserInput = {
     totalPrice: number
+    razorpayOrderId: string
+    paymentId?: string | null
+    paymentSignature?: string | null
+    paymentDate?: Date | string | null
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13430,6 +13696,10 @@ export namespace Prisma {
   export type OrderUncheckedCreateWithoutUserInput = {
     id?: number
     totalPrice: number
+    razorpayOrderId: string
+    paymentId?: string | null
+    paymentSignature?: string | null
+    paymentDate?: Date | string | null
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13548,6 +13818,10 @@ export namespace Prisma {
     id?: IntFilter<"Order"> | number
     userId?: IntFilter<"Order"> | number
     totalPrice?: FloatFilter<"Order"> | number
+    razorpayOrderId?: StringFilter<"Order"> | string
+    paymentId?: StringNullableFilter<"Order"> | string | null
+    paymentSignature?: StringNullableFilter<"Order"> | string | null
+    paymentDate?: DateTimeNullableFilter<"Order"> | Date | string | null
     status?: StringFilter<"Order"> | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     updatedAt?: DateTimeFilter<"Order"> | Date | string
@@ -14476,6 +14750,10 @@ export namespace Prisma {
 
   export type OrderCreateWithoutItemsInput = {
     totalPrice: number
+    razorpayOrderId: string
+    paymentId?: string | null
+    paymentSignature?: string | null
+    paymentDate?: Date | string | null
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14486,6 +14764,10 @@ export namespace Prisma {
     id?: number
     userId: number
     totalPrice: number
+    razorpayOrderId: string
+    paymentId?: string | null
+    paymentSignature?: string | null
+    paymentDate?: Date | string | null
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14561,6 +14843,10 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutItemsInput = {
     totalPrice?: FloatFieldUpdateOperationsInput | number
+    razorpayOrderId?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentSignature?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14571,6 +14857,10 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     totalPrice?: FloatFieldUpdateOperationsInput | number
+    razorpayOrderId?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentSignature?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14662,6 +14952,10 @@ export namespace Prisma {
   export type OrderCreateManyUserInput = {
     id?: number
     totalPrice: number
+    razorpayOrderId: string
+    paymentId?: string | null
+    paymentSignature?: string | null
+    paymentDate?: Date | string | null
     status?: string
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -14723,6 +15017,10 @@ export namespace Prisma {
 
   export type OrderUpdateWithoutUserInput = {
     totalPrice?: FloatFieldUpdateOperationsInput | number
+    razorpayOrderId?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentSignature?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14732,6 +15030,10 @@ export namespace Prisma {
   export type OrderUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     totalPrice?: FloatFieldUpdateOperationsInput | number
+    razorpayOrderId?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentSignature?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14741,6 +15043,10 @@ export namespace Prisma {
   export type OrderUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     totalPrice?: FloatFieldUpdateOperationsInput | number
+    razorpayOrderId?: StringFieldUpdateOperationsInput | string
+    paymentId?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentSignature?: NullableStringFieldUpdateOperationsInput | string | null
+    paymentDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     status?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string

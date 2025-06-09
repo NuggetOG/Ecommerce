@@ -37,7 +37,7 @@ export const Orders = () => {
 
   
 
-  const handlePayNow = async (amount) => {
+  const handlePayNow = async (order) => {
     try {
        // Fetch Razorpay key from the backend
       const response = await getKey();
@@ -46,20 +46,15 @@ export const Orders = () => {
       }
       const key = response.key; // Get the Razorpay key from the response
       console.log("Razorpay key fetched successfully:", key); // Debugging
-      const response2 = await processPayment(amount); // Process payment(creating razorpay order)
-      if (!response2.success) {
-        throw new Error(response2.message || "Payment processing failed");
-      } 
-      const orderId = response2.order.id; // Get the order ID from the response
-      console.log("Payment order created successfully! orderId= ", orderId); // Debugging
+      
       // Proceed with Razorpay payment
       const options = {
         key: key, // Replace with your Razorpay key_id
-        amount: amount * 100, // Amount is in currency subunits. Default currency is INR. Hence, multiply by 100
+        amount: order.totalPrice * 100, // Amount is in currency subunits. Default currency is INR. Hence, multiply by 100
         currency: "INR",
         name: "blacro",
         description: "order payment",
-        order_id: orderId, // Use the order ID from Razorpay
+        order_id: order.razorpayOrderId, // Use the order ID from Razorpay
 
         callback_url: "http://localhost:5000/api/v1/pay/verify", // Your success URL
         prefill: {
@@ -70,26 +65,34 @@ export const Orders = () => {
         theme: {
           color: "#F37254",
         },
-         handler: async function (response) {
-  // This function is called after the payment is completed
+  handler: async function (response) {
   console.log("Payment successful:", response);
 
   // Extract payment details from the Razorpay response
   const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = response;
 
+  console.log("Payload being sent to backend:", {
+    razorpay_order_id,
+    razorpay_payment_id,
+    razorpay_signature,
+  });
+
   try {
     // Use axios to call the backend verifyPayment route
-    const verifyResponse = await axios.post("http://localhost:5000/api/v1/pay/verify", {
-      razorpay_order_id,
-      razorpay_payment_id,
-      razorpay_signature,
-    },{withCredentials: true}); // Include credentials for session management
+    const verifyResponse = await axios.post(
+      "http://localhost:5000/api/v1/pay/verify",
+      {
+        razorpay_order_id,
+        razorpay_payment_id,
+        razorpay_signature,
+      },
+      { withCredentials: true } // Include credentials for session management
+    );
 
     // Handle the backend response
     if (verifyResponse.data.success) {
-      alert("Payment verified successfully ! transaction completed successfully!"); // Show success message
-      // Redirect to orders.jsx or profile.jsx
-      navigate("/orders"); // Use React Router DOM's navigate function
+      alert("Payment verified. Transaction completed successfully!");
+      navigate("/orders"); // Redirect to orders.jsx
     } else {
       alert("Payment verification failed. Please contact support.");
     }
@@ -166,20 +169,25 @@ export const Orders = () => {
                         </li>
                       ))}
                   </ul>
-                  {/* Pay Now and Cancel Order Buttons */}
+                 {/* Pay Now and Cancel Order Buttons */}
                   <div className="flex gap-4 mt-4">
                     {order.status === "PENDING" && (
                       <button
-                        onClick={() => handlePayNow(order.totalPrice)}
+                        onClick={() => handlePayNow(order)}
                         className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded"
                       >
                         Pay Now
                       </button>
                     )}
+                    {order.status === "APPROVED" && (
+                      <span className="text-green-600 font-semibold">Paid</span> // Reflect that the order is paid
+                    )}
                     <button
                       onClick={() => handleCancelOrder(order.id)} // Cancel order function
                       disabled={order.status !== "PENDING"} // Disable if not pending
-                      className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded"
+                      className={`${
+                        order.status !== "PENDING" ? "bg-gray-400 cursor-not-allowed" : "bg-red-500 hover:bg-red-600"
+                      } text-white px-4 py-2 rounded`}
                     >
                       Cancel Order
                     </button>
